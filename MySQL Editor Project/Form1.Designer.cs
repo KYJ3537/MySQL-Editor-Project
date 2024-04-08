@@ -117,7 +117,7 @@
             this.label_find_id.AutoSize = true;
             this.label_find_id.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.label_find_id.ForeColor = System.Drawing.Color.Blue;
-            this.label_find_id.Location = new System.Drawing.Point(88, 209);
+            this.label_find_id.Location = new System.Drawing.Point(88, 207);
             this.label_find_id.Name = "label_find_id";
             this.label_find_id.Size = new System.Drawing.Size(137, 15);
             this.label_find_id.TabIndex = 3;
@@ -127,7 +127,7 @@
             // 
             this.btn_login.Location = new System.Drawing.Point(7, 231);
             this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(290, 52);
+            this.btn_login.Size = new System.Drawing.Size(288, 52);
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "로그인";
             this.btn_login.UseVisualStyleBackColor = true;
@@ -237,7 +237,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 231);
+            this.button1.Location = new System.Drawing.Point(7, 231);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(288, 52);
             this.button1.TabIndex = 5;
@@ -265,7 +265,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(332, 337);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.Name = "Login";
