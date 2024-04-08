@@ -1,8 +1,8 @@
 namespace MySQL_Editor_Project
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
