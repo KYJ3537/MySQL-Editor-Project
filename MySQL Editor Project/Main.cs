@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MySQL_Editor_Project
 {
-    public partial class Register : Form
+    public partial class Main : Form
     {
-        public Register()
+        public Main()
         {
             InitializeComponent();
         }
