@@ -38,6 +38,7 @@
             this.txt_Login_pw = new System.Windows.Forms.TextBox();
             this.txt_Login_id = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.register_btn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.timepicker_birth = new System.Windows.Forms.DateTimePicker();
             this.txt_register_email = new System.Windows.Forms.TextBox();
             this.txt_register_2ndpw = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.txt_register_pw = new System.Windows.Forms.TextBox();
             this.txt_register_id = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
@@ -86,9 +86,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::MySQL_Editor_Project.Properties.Resources.login_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(88, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(130, 133);
+            this.pictureBox1.Size = new System.Drawing.Size(303, 133);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
@@ -117,11 +118,12 @@
             this.label_find_id.AutoSize = true;
             this.label_find_id.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.label_find_id.ForeColor = System.Drawing.Color.Blue;
-            this.label_find_id.Location = new System.Drawing.Point(91, 210);
+            this.label_find_id.Location = new System.Drawing.Point(91, 207);
             this.label_find_id.Name = "label_find_id";
             this.label_find_id.Size = new System.Drawing.Size(137, 15);
             this.label_find_id.TabIndex = 3;
             this.label_find_id.Text = "패스워드를 잊으셨나요?";
+            this.label_find_id.Click += new System.EventHandler(this.label_find_id_Click);
             // 
             // btn_login
             // 
@@ -131,11 +133,13 @@
             this.btn_login.TabIndex = 2;
             this.btn_login.Text = "로그인";
             this.btn_login.UseVisualStyleBackColor = true;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
             // txt_Login_pw
             // 
             this.txt_Login_pw.Location = new System.Drawing.Point(67, 174);
             this.txt_Login_pw.Name = "txt_Login_pw";
+            this.txt_Login_pw.PasswordChar = '*';
             this.txt_Login_pw.Size = new System.Drawing.Size(227, 23);
             this.txt_Login_pw.TabIndex = 1;
             // 
@@ -149,6 +153,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.register_btn);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label3);
@@ -157,7 +162,6 @@
             this.tabPage2.Controls.Add(this.timepicker_birth);
             this.tabPage2.Controls.Add(this.txt_register_email);
             this.tabPage2.Controls.Add(this.txt_register_2ndpw);
-            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.txt_register_pw);
             this.tabPage2.Controls.Add(this.txt_register_id);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
@@ -167,10 +171,20 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "회원가입";
             // 
+            // register_btn
+            // 
+            this.register_btn.Location = new System.Drawing.Point(6, 231);
+            this.register_btn.Name = "register_btn";
+            this.register_btn.Size = new System.Drawing.Size(288, 52);
+            this.register_btn.TabIndex = 14;
+            this.register_btn.Text = "회원가입";
+            this.register_btn.UseVisualStyleBackColor = true;
+            this.register_btn.Click += new System.EventHandler(this.register_btn_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 170);
+            this.label5.Location = new System.Drawing.Point(9, 167);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 15);
             this.label5.TabIndex = 13;
@@ -190,9 +204,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 15);
+            this.label3.Size = new System.Drawing.Size(43, 15);
             this.label3.TabIndex = 11;
-            this.label3.Text = "패스워드";
+            this.label3.Text = "재입력";
             // 
             // label2
             // 
@@ -218,6 +232,7 @@
             this.timepicker_birth.Name = "timepicker_birth";
             this.timepicker_birth.Size = new System.Drawing.Size(227, 23);
             this.timepicker_birth.TabIndex = 8;
+            this.timepicker_birth.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // txt_register_email
             // 
@@ -225,32 +240,22 @@
             this.txt_register_email.Name = "txt_register_email";
             this.txt_register_email.Size = new System.Drawing.Size(227, 23);
             this.txt_register_email.TabIndex = 7;
-            this.txt_register_email.Text = "이메일을 입력해주세요.";
             // 
             // txt_register_2ndpw
             // 
             this.txt_register_2ndpw.Location = new System.Drawing.Point(67, 103);
             this.txt_register_2ndpw.Name = "txt_register_2ndpw";
+            this.txt_register_2ndpw.PasswordChar = '*';
             this.txt_register_2ndpw.Size = new System.Drawing.Size(227, 23);
             this.txt_register_2ndpw.TabIndex = 6;
-            this.txt_register_2ndpw.Text = "패스워드를 재입력해주세요";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(7, 231);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(288, 52);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "회원가입";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // txt_register_pw
             // 
             this.txt_register_pw.Location = new System.Drawing.Point(67, 74);
             this.txt_register_pw.Name = "txt_register_pw";
+            this.txt_register_pw.PasswordChar = '*';
             this.txt_register_pw.Size = new System.Drawing.Size(227, 23);
             this.txt_register_pw.TabIndex = 4;
-            this.txt_register_pw.Text = "패스워드를 입력해주세요";
             // 
             // txt_register_id
             // 
@@ -258,7 +263,6 @@
             this.txt_register_id.Name = "txt_register_id";
             this.txt_register_id.Size = new System.Drawing.Size(227, 23);
             this.txt_register_id.TabIndex = 3;
-            this.txt_register_id.Text = "아이디를 입력해주세요";
             // 
             // Invite
             // 
@@ -267,7 +271,7 @@
             this.ClientSize = new System.Drawing.Size(337, 346);
             this.Controls.Add(this.tabControl1);
             this.Name = "Invite";
-            this.Text = "Invite";
+            this.Text = "입장하기";
             this.tabControl1.ResumeLayout(false);
             this.tab.ResumeLayout(false);
             this.tab.PerformLayout();
@@ -298,8 +302,8 @@
         private DateTimePicker timepicker_birth;
         private TextBox txt_register_email;
         private TextBox txt_register_2ndpw;
-        private Button button1;
         private TextBox txt_register_pw;
         private TextBox txt_register_id;
+        private Button register_btn;
     }
 }
