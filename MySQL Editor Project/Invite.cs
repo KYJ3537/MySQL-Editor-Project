@@ -22,7 +22,7 @@ namespace MySQL_Editor_Project
 
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (txt_Login_id.Text == "")
+            if (txt_Login_id.Text == "")//
             {
                 MessageBox.Show("아이디를 입력해주세요.");
                 return;
