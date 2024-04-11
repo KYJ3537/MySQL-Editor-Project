@@ -67,13 +67,26 @@ namespace MySQL_Editor_Project
             try
             {
 
-                timepicker_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
-
-                MessageBox.Show(timepicker_birth.Text);
-
                 MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
-
                 connection.Open();
+
+                // 해당 아이디가 이미 존재하는지 확인하는 쿼리
+                string checkQuery = "SELECT COUNT(*) FROM accounts WHERE id = @id";
+                MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection);
+                checkCommand.Parameters.AddWithValue("@id", txt_register_id.Text);
+
+                int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                // 아이디가 존재하면 회원가입 거부 후 반환
+                if (count > 0)
+                {
+                    connection.Close();
+                    MessageBox.Show("이미 존재하는 ID입니다.");
+                    return false;
+                }
+
+                // 생년월일을 birthday 컬럼 데이터 규격에 맞게 변환
+                timepicker_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
 
                 string insertQuery = "INSERT INTO accounts (id, password, email, birthday) VALUES ('" + txt_register_id.Text +
                                                                                                   "', '" + txt_register_pw.Text +
