@@ -120,9 +120,6 @@ namespace MySQL_Editor_Project
             {
                 MessageBox.Show("로그인 실패");
             }
-
-
-
         }
 
         private void register_btn_Click(object sender, EventArgs e)
@@ -159,7 +156,6 @@ namespace MySQL_Editor_Project
             {
                 MessageBox.Show("회원가입 완료");
             }
-
         }
 
         private void label_find_id_Click(object sender, EventArgs e)
