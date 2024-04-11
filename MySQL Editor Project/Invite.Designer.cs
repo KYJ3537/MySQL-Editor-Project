@@ -272,6 +272,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Invite";
             this.Text = "입장하기";
+            this.Load += new System.EventHandler(this.Invite_Load);
             this.tabControl1.ResumeLayout(false);
             this.tab.ResumeLayout(false);
             this.tab.PerformLayout();

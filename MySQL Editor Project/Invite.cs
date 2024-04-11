@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace MySQL_Editor_Project
 {
@@ -17,6 +20,86 @@ namespace MySQL_Editor_Project
             InitializeComponent();
         }
 
+        private bool login_funtion()
+        {
+            try
+            {
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+                int login_status = 0;
+                string loginid = txt_Login_id.Text;
+                string loginpwd = txt_Login_pw.Text;
+
+                string send_login_query = "SELECT * FROM accounts WHERE id = \'" + loginid + "\' ";
+
+                MySqlCommand Selectcommand = new MySqlCommand(send_login_query, connection);
+                MySqlDataReader userAccount = Selectcommand.ExecuteReader();
+
+                while (userAccount.Read())
+                {
+                    if (loginid == (string)userAccount["id"] && loginpwd == (string)userAccount["password"]) {
+                        login_status = 1;
+                    }
+                }
+
+                if (login_status == 1)
+                {
+                    DateTimePicker dateTime1 = new DateTimePicker();
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    connection.Close();
+                    return false;
+                }
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                return false;
+            }
+        }
+
+        private bool register_funtion()
+        {
+            try
+            {
+
+                timepicker_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+
+                MessageBox.Show(timepicker_birth.Text);
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+
+                connection.Open();
+
+                string insertQuery = "INSERT INTO accounts (id, password, email, birthday) VALUES ('" + txt_register_id.Text +
+                                                                                                  "', '" + txt_register_pw.Text +
+                                                                                                  "', '" + txt_register_email.Text +
+                                                                                                  "', '" + timepicker_birth.Text + "');";
+
+                MySqlCommand command = new MySqlCommand(insertQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    connection.Close();
+                    MessageBox.Show("오류 발생");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
 
         private void btn_login_Click(object sender, EventArgs e)
         {
@@ -30,10 +113,21 @@ namespace MySQL_Editor_Project
                 return;
             }
 
+            if (login_funtion() == true)
+            {
+                MessageBox.Show("로그인 성공");
+            } else
+            {
+                MessageBox.Show("로그인 실패");
+            }
+
+
+
         }
 
         private void register_btn_Click(object sender, EventArgs e)
         {
+
             if (txt_register_id.Text == "")
             {
                 MessageBox.Show("아이디를 입력해주세요.");
@@ -61,6 +155,11 @@ namespace MySQL_Editor_Project
                 return;
             }
 
+            if (register_funtion() == true)
+            {
+                MessageBox.Show("회원가입 완료");
+            }
+
         }
 
         private void label_find_id_Click(object sender, EventArgs e)
@@ -68,6 +167,11 @@ namespace MySQL_Editor_Project
             FindPassword findpassword = new FindPassword();
             findpassword.Show();
             findpassword.BringToFront();
+        }
+
+        private void Invite_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
