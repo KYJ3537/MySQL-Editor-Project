@@ -19,49 +19,6 @@ namespace MySQL_Editor_Project
             InitializeComponent();
         }
 
-        private int findpw_funtion()
-        {
-            try
-            {
-                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
-                connection.Open();
-
-                // 사용자가 입력한 정보와 일치하는 계정을 조회하는 쿼리
-
-                timepicker_findpw_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
-
-                string find_query = "SELECT password FROM accounts WHERE id = '" + txt_findpw_id.Text +
-                                                              "' AND email = '" + txt_findpw_email.Text +
-                                                              "' AND birthday = '" + timepicker_findpw_birth.Text +
-                                                              "'";
-
-                MySqlCommand command = new MySqlCommand(find_query, connection);
-
-                MySqlDataReader reader = command.ExecuteReader();
-
-                // 일치하는 계정이 있는 경우 비밀번호 반환
-                if (reader.Read())
-                {
-                    string password = reader.GetString("password");
-                    MessageBox.Show("아이디 " + txt_findpw_id.Text + "의 비밀번호\r\n\r\n" + password);
-                    connection.Close();
-                    this.Close();
-                    return 0;
-                }
-                else
-                {
-                    MessageBox.Show("일치하는 아이디가 없습니다.");
-                    connection.Close();
-                    return 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return 0;
-            }
-        }
-
         private void findpw_btn_Click_1(object sender, EventArgs e)
         {
             if (txt_findpw_id.Text == "")
@@ -75,7 +32,7 @@ namespace MySQL_Editor_Project
                 return;
             }
 
-            findpw_funtion();
+
         }
     }
 }
