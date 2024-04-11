@@ -30,7 +30,7 @@ namespace MySQL_Editor_Project
                 string loginid = txt_Login_id.Text;
                 string loginpwd = txt_Login_pw.Text;
 
-                string send_login_query = "SELECT * FROM accounts WHERE id = \'" + loginid + "\' ";
+                string send_login_query = "SELECT * FROM accounts WHERE id = '" + loginid + "' ";
 
                 MySqlCommand Selectcommand = new MySqlCommand(send_login_query, connection);
                 MySqlDataReader userAccount = Selectcommand.ExecuteReader();
@@ -71,9 +71,8 @@ namespace MySQL_Editor_Project
                 connection.Open();
 
                 // 해당 아이디가 이미 존재하는지 확인하는 쿼리
-                string checkQuery = "SELECT COUNT(*) FROM accounts WHERE id = @id";
+                string checkQuery = "SELECT COUNT(*) FROM accounts WHERE id = \'" + txt_register_id.Text + "\' ";
                 MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection);
-                checkCommand.Parameters.AddWithValue("@id", txt_register_id.Text);
 
                 int count = Convert.ToInt32(checkCommand.ExecuteScalar());
 
@@ -81,7 +80,7 @@ namespace MySQL_Editor_Project
                 if (count > 0)
                 {
                     connection.Close();
-                    MessageBox.Show("이미 존재하는 ID입니다.");
+                    MessageBox.Show("이미 존재하는 아이디입니다.");
                     return false;
                 }
 
