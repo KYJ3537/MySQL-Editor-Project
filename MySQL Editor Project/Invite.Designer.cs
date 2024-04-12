@@ -97,7 +97,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(10, 180);
+            this.label6.Location = new System.Drawing.Point(8, 180);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 15);
             this.label6.TabIndex = 12;
@@ -107,7 +107,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(10, 151);
+            this.label7.Location = new System.Drawing.Point(8, 151);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(43, 15);
             this.label7.TabIndex = 11;
@@ -115,14 +115,14 @@
             // 
             // label_find_id
             // 
-            this.label_find_id.AutoSize = true;
             this.label_find_id.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this.label_find_id.ForeColor = System.Drawing.Color.Blue;
-            this.label_find_id.Location = new System.Drawing.Point(91, 207);
+            this.label_find_id.Location = new System.Drawing.Point(0, 208);
             this.label_find_id.Name = "label_find_id";
-            this.label_find_id.Size = new System.Drawing.Size(137, 15);
+            this.label_find_id.Size = new System.Drawing.Size(303, 20);
             this.label_find_id.TabIndex = 3;
             this.label_find_id.Text = "패스워드를 잊으셨나요?";
+            this.label_find_id.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label_find_id.Click += new System.EventHandler(this.label_find_id_Click);
             // 
             // btn_login
@@ -137,7 +137,7 @@
             // 
             // txt_Login_pw
             // 
-            this.txt_Login_pw.Location = new System.Drawing.Point(67, 174);
+            this.txt_Login_pw.Location = new System.Drawing.Point(65, 174);
             this.txt_Login_pw.Name = "txt_Login_pw";
             this.txt_Login_pw.PasswordChar = '*';
             this.txt_Login_pw.Size = new System.Drawing.Size(227, 23);
@@ -145,7 +145,7 @@
             // 
             // txt_Login_id
             // 
-            this.txt_Login_id.Location = new System.Drawing.Point(67, 145);
+            this.txt_Login_id.Location = new System.Drawing.Point(65, 145);
             this.txt_Login_id.Name = "txt_Login_id";
             this.txt_Login_id.Size = new System.Drawing.Size(227, 23);
             this.txt_Login_id.TabIndex = 0;
@@ -184,7 +184,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 167);
+            this.label5.Location = new System.Drawing.Point(7, 167);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 15);
             this.label5.TabIndex = 13;
@@ -193,7 +193,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 138);
+            this.label4.Location = new System.Drawing.Point(7, 138);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 15);
             this.label4.TabIndex = 12;
@@ -202,7 +202,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 109);
+            this.label3.Location = new System.Drawing.Point(7, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 15);
             this.label3.TabIndex = 11;
@@ -211,7 +211,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 80);
+            this.label2.Location = new System.Drawing.Point(7, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 15);
             this.label2.TabIndex = 10;
@@ -220,7 +220,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 51);
+            this.label1.Location = new System.Drawing.Point(7, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 9;
@@ -228,7 +228,7 @@
             // 
             // timepicker_birth
             // 
-            this.timepicker_birth.Location = new System.Drawing.Point(67, 161);
+            this.timepicker_birth.Location = new System.Drawing.Point(65, 161);
             this.timepicker_birth.Name = "timepicker_birth";
             this.timepicker_birth.Size = new System.Drawing.Size(227, 23);
             this.timepicker_birth.TabIndex = 8;
@@ -236,14 +236,14 @@
             // 
             // txt_register_email
             // 
-            this.txt_register_email.Location = new System.Drawing.Point(67, 132);
+            this.txt_register_email.Location = new System.Drawing.Point(65, 132);
             this.txt_register_email.Name = "txt_register_email";
             this.txt_register_email.Size = new System.Drawing.Size(227, 23);
             this.txt_register_email.TabIndex = 7;
             // 
             // txt_register_2ndpw
             // 
-            this.txt_register_2ndpw.Location = new System.Drawing.Point(67, 103);
+            this.txt_register_2ndpw.Location = new System.Drawing.Point(65, 103);
             this.txt_register_2ndpw.Name = "txt_register_2ndpw";
             this.txt_register_2ndpw.PasswordChar = '*';
             this.txt_register_2ndpw.Size = new System.Drawing.Size(227, 23);
@@ -251,7 +251,7 @@
             // 
             // txt_register_pw
             // 
-            this.txt_register_pw.Location = new System.Drawing.Point(67, 74);
+            this.txt_register_pw.Location = new System.Drawing.Point(65, 74);
             this.txt_register_pw.Name = "txt_register_pw";
             this.txt_register_pw.PasswordChar = '*';
             this.txt_register_pw.Size = new System.Drawing.Size(227, 23);
@@ -259,7 +259,7 @@
             // 
             // txt_register_id
             // 
-            this.txt_register_id.Location = new System.Drawing.Point(67, 45);
+            this.txt_register_id.Location = new System.Drawing.Point(65, 45);
             this.txt_register_id.Name = "txt_register_id";
             this.txt_register_id.Size = new System.Drawing.Size(227, 23);
             this.txt_register_id.TabIndex = 3;
@@ -268,9 +268,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 346);
+            this.ClientSize = new System.Drawing.Size(334, 346);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Invite";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "입장하기";
             this.Load += new System.EventHandler(this.Invite_Load);
             this.tabControl1.ResumeLayout(false);
