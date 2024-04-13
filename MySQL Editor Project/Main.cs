@@ -82,12 +82,7 @@ namespace MySQL_Editor_Project
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-            //ListViewItem list0 = new ListViewItem("행0");
-            //list0.SubItems.Add("행0의 열1");
-            //list0.SubItems.Add("행0의 열2");
-            //list0.SubItems.Add("행0의 열3");
-            //list0.SubItems.Add("행0의 열4");
-            //search_book_listview.Items.Add(list0);
+
         }
 
         private void Main_Load(object sender, EventArgs e)
