@@ -56,6 +56,8 @@
             this.mybook_columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.mybook_columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.main_tabpage3 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -87,8 +89,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.title_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).BeginInit();
             this.main_tab.SuspendLayout();
@@ -160,6 +160,8 @@
             this.search_book_listview_columnHeader5,
             this.search_book_listview_columnHeader6,
             this.search_book_listview_columnHeader7});
+            this.search_book_listview.FullRowSelect = true;
+            this.search_book_listview.GridLines = true;
             this.search_book_listview.Location = new System.Drawing.Point(13, 42);
             this.search_book_listview.MultiSelect = false;
             this.search_book_listview.Name = "search_book_listview";
@@ -167,11 +169,13 @@
             this.search_book_listview.TabIndex = 2;
             this.search_book_listview.UseCompatibleStateImageBehavior = false;
             this.search_book_listview.View = System.Windows.Forms.View.Details;
+            this.search_book_listview.SelectedIndexChanged += new System.EventHandler(this.search_book_listview_SelectedIndexChanged);
+            this.search_book_listview.DoubleClick += new System.EventHandler(this.search_book_listview_DoubleClick);
             // 
             // search_book_listview_columnHeader0
             // 
             this.search_book_listview_columnHeader0.Text = "책 인덱스";
-            this.search_book_listview_columnHeader0.Width = 100;
+            this.search_book_listview_columnHeader0.Width = 70;
             // 
             // search_book_listview_columnHeader1
             // 
@@ -191,12 +195,12 @@
             // search_book_listview_columnHeader4
             // 
             this.search_book_listview_columnHeader4.Text = "설명";
-            this.search_book_listview_columnHeader4.Width = 420;
+            this.search_book_listview_columnHeader4.Width = 330;
             // 
             // search_book_listview_columnHeader5
             // 
             this.search_book_listview_columnHeader5.Text = "고유번호";
-            this.search_book_listview_columnHeader5.Width = 110;
+            this.search_book_listview_columnHeader5.Width = 130;
             // 
             // search_book_listview_columnHeader6
             // 
@@ -314,6 +318,23 @@
             this.main_tabpage3.TabIndex = 2;
             this.main_tabpage3.Text = "관리자";
             this.main_tabpage3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(539, 6);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(70, 23);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "검색";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox9.Location = new System.Drawing.Point(3, 6);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(530, 23);
+            this.textBox9.TabIndex = 9;
             // 
             // groupBox3
             // 
@@ -605,23 +626,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "이름";
             // 
-            // textBox9
-            // 
-            this.textBox9.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox9.Location = new System.Drawing.Point(3, 6);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(530, 23);
-            this.textBox9.TabIndex = 9;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(539, 6);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(70, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "검색";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -634,6 +638,7 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "도서관";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.title_panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).EndInit();
             this.main_tab.ResumeLayout(false);

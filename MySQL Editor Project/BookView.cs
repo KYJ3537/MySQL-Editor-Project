@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace MySQL_Editor_Project
 {
@@ -19,7 +20,26 @@ namespace MySQL_Editor_Project
             InitializeComponent();
         }
 
-        private void exit_btn_Click(object sender, EventArgs e)
+        private void pv_load_image_funtion()
+        {
+            // bv_image_label의 이미지 주소 가져오기
+            string imageUrl = bv_image_txt.Text;
+
+            // WebClient를 사용하여 이미지 다운로드
+            using (WebClient webClient = new WebClient())
+            {
+                byte[] imageBytes = webClient.DownloadData(imageUrl);
+                // 바이트 배열로부터 이미지 생성
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                {
+                    Image image = Image.FromStream(ms);
+                    // 이미지를 PictureBox에 설정
+                    bv_image.Image = image;
+                }
+            }
+        }
+
+            private void exit_btn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -46,6 +66,21 @@ namespace MySQL_Editor_Project
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkOut_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BookView_Load(object sender, EventArgs e)
+        {
+            pv_load_image_funtion();
+        }
+
+        private void bv_image_txt_TextChanged(object sender, EventArgs e)
         {
 
         }
