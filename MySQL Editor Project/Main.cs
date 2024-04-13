@@ -108,7 +108,15 @@ namespace MySQL_Editor_Project
                 bookViewForm.bv_number_label.Text = selectedItem.SubItems[5].Text; // code
                 bookViewForm.bv_last_label.Text = "남은 재고 수 : " + selectedItem.SubItems[6].Text; // remain
                 bookViewForm.bv_image_txt.Text = selectedItem.SubItems[7].Text; // image
+                
+                // 님을 기준으로 Split 메서드 사용으로 아이디만 추출해서 담기
+                string[] parts = main_id_label.Text.Split(new string[] { "님" }, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length > 0)
+                {
+                    string userId = parts[0];
 
+                    bookViewForm.bv_user_id = userId;
+                }
 
                 bookViewForm.ShowDialog();
             }

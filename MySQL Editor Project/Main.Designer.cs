@@ -89,6 +89,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.main_id_label = new System.Windows.Forms.Label();
             this.title_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).BeginInit();
             this.main_tab.SuspendLayout();
@@ -130,7 +131,7 @@
             this.main_tab.Controls.Add(this.main_tabpage1);
             this.main_tab.Controls.Add(this.main_tabpage2);
             this.main_tab.Controls.Add(this.main_tabpage3);
-            this.main_tab.Location = new System.Drawing.Point(12, 45);
+            this.main_tab.Location = new System.Drawing.Point(12, 80);
             this.main_tab.Name = "main_tab";
             this.main_tab.SelectedIndex = 0;
             this.main_tab.Size = new System.Drawing.Size(1009, 540);
@@ -626,11 +627,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "이름";
             // 
+            // main_id_label
+            // 
+            this.main_id_label.AutoSize = true;
+            this.main_id_label.BackColor = System.Drawing.Color.Transparent;
+            this.main_id_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.main_id_label.ForeColor = System.Drawing.Color.Black;
+            this.main_id_label.Location = new System.Drawing.Point(12, 49);
+            this.main_id_label.Name = "main_id_label";
+            this.main_id_label.Size = new System.Drawing.Size(157, 21);
+            this.main_id_label.TabIndex = 3;
+            this.main_id_label.Text = "NULL님 환영합니다.";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1033, 597);
+            this.ClientSize = new System.Drawing.Size(1033, 628);
+            this.Controls.Add(this.main_id_label);
             this.Controls.Add(this.main_tab);
             this.Controls.Add(this.title_panel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -654,6 +668,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -719,5 +734,6 @@
         private Label label8;
         private Button button4;
         private TextBox textBox9;
+        public Label main_id_label;
     }
 }

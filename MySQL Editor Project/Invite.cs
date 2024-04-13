@@ -130,6 +130,13 @@ namespace MySQL_Editor_Project
             if (login_funtion() == true)
             {
                 MessageBox.Show("로그인 성공");
+
+                // Main 윈도우 폼 생성
+                Main mainForm = new Main();
+                mainForm.main_id_label.Text = txt_Login_id.Text + "님 환영합니다.";
+                mainForm.ShowDialog();
+                this.Hide();
+
             }
             else
             {

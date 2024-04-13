@@ -14,10 +14,12 @@ namespace MySQL_Editor_Project
     public partial class BookView : Form
     {
         private Point Drag = new Point();
+        public string bv_user_id = "";
 
         public BookView()
         {
             InitializeComponent();
+            
         }
 
         private void pv_load_image_funtion()
@@ -78,6 +80,7 @@ namespace MySQL_Editor_Project
         private void BookView_Load(object sender, EventArgs e)
         {
             pv_load_image_funtion();
+            MessageBox.Show(bv_user_id);
         }
 
         private void bv_image_txt_TextChanged(object sender, EventArgs e)
