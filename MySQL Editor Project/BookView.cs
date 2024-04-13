@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using MySql.Data.MySqlClient;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace MySQL_Editor_Project
 {
@@ -15,6 +17,8 @@ namespace MySQL_Editor_Project
     {
         private Point Drag = new Point();
         public string bv_user_id = "";
+        private string bv_account_index = "";
+        private string bv_book_index = "";
 
         public BookView()
         {
@@ -41,7 +45,92 @@ namespace MySQL_Editor_Project
             }
         }
 
-            private void exit_btn_Click(object sender, EventArgs e)
+        private void borrow_funtion()
+        {
+            try
+            {
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                // accounts 테이블에서 primary key 값을 조회하여 bv_account_index에 할당
+                string accountIndexQuery = "SELECT `index` FROM accounts WHERE id = '" + bv_user_id + "'";
+                MySqlCommand accountIndexCommand = new MySqlCommand(accountIndexQuery, connection);
+                object accountIndexResult = accountIndexCommand.ExecuteScalar();
+
+                if (accountIndexResult != null)
+                {
+                    bv_account_index = accountIndexResult.ToString();
+                } else
+                {
+                    MessageBox.Show("아이디 번호를 구할 수 없습니다.");
+                    return;
+                }
+
+                // book_list 테이블에서 primary key 값을 조회하여 bv_book_index에 할당
+                string bookIndexQuery = "SELECT `index` FROM book_list WHERE code = '" + bv_number_label.Text + "'";
+                MySqlCommand bookIndexCommand = new MySqlCommand(bookIndexQuery, connection);
+                object bookIndexResult = bookIndexCommand.ExecuteScalar();
+
+                if (bookIndexResult != null)
+                {
+                    bv_book_index = bookIndexResult.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("책 번호를 구할 수 없습니다.");
+                    return;
+                }
+
+                // 해당 책을 이미 빌리고 있는지 확인하는 쿼리
+                string checkQuery = "SELECT COUNT(*) FROM book_borrow WHERE id = '" + bv_user_id + "' AND bookcode = '" + bv_number_label.Text + "'";
+                MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection);
+
+                int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+
+                // 고유번호가 이미 bv_user_id로 빌리고 있다면 거부 후 반환
+                if (count > 0)
+                {
+                    connection.Close();
+                    MessageBox.Show("이미 대출 중인 책입니다.");
+                    return;
+                }
+
+                // 현재 시간과 반납 시간을 birthday 컬럼 데이터 규격에 맞게 변환
+                DateTime currentTime = DateTime.Now;
+                DateTime addTime = currentTime.AddDays(7);
+                string startTime = currentTime.ToString("yyyy-MM-dd hh:mm:ss");
+                string stopTime = addTime.ToString("yyyy-MM-dd hh:mm:ss");
+
+                string insertQuery = "INSERT INTO book_borrow (id, accountid, bookindex, bookcode, start, stop) VALUES ('" + bv_user_id + //아이디
+                                                                                                  "', '" + bv_account_index + //아이디인덱스
+                                                                                                  "', '" + bv_book_index + //북인덱스
+                                                                                                  "', '" + bv_number_label.Text +//고유번호
+                                                                                                  "', '" + startTime + //시작
+                                                                                                  "', '" + stopTime + "');"; //반납
+
+                MySqlCommand command = new MySqlCommand(insertQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    connection.Close();
+                    return;
+                }
+                else
+                {
+                    connection.Close();
+                    MessageBox.Show("오류 발생");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
+        private void exit_btn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -74,7 +163,7 @@ namespace MySQL_Editor_Project
 
         private void checkOut_btn_Click(object sender, EventArgs e)
         {
-
+            borrow_funtion();
         }
 
         private void BookView_Load(object sender, EventArgs e)
