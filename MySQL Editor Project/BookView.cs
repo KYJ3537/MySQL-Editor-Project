@@ -80,7 +80,6 @@ namespace MySQL_Editor_Project
         private void BookView_Load(object sender, EventArgs e)
         {
             pv_load_image_funtion();
-            MessageBox.Show(bv_user_id);
         }
 
         private void bv_image_txt_TextChanged(object sender, EventArgs e)
