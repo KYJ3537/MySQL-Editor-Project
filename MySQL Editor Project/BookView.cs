@@ -26,7 +26,7 @@ namespace MySQL_Editor_Project
             
         }
 
-        private void pv_load_image_funtion()
+        private void LoadImage_Funtion()
         {
             // bv_image_label의 이미지 주소 가져오기
             string imageUrl = bv_image_txt.Text;
@@ -45,7 +45,7 @@ namespace MySQL_Editor_Project
             }
         }
 
-        private void borrow_funtion()
+        private void Borrow_funtion()
         {
             try
             {
@@ -163,12 +163,12 @@ namespace MySQL_Editor_Project
 
         private void checkOut_btn_Click(object sender, EventArgs e)
         {
-            borrow_funtion();
+            Borrow_funtion();
         }
 
         private void BookView_Load(object sender, EventArgs e)
         {
-            pv_load_image_funtion();
+            LoadImage_Funtion();
         }
 
         private void bv_image_txt_TextChanged(object sender, EventArgs e)

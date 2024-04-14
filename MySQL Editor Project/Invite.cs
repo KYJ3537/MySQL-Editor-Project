@@ -20,7 +20,7 @@ namespace MySQL_Editor_Project
             InitializeComponent();
         }
 
-        private bool login_funtion()
+        private bool Login_funtion()
         {
             try
             {
@@ -127,7 +127,7 @@ namespace MySQL_Editor_Project
                 return;
             }
 
-            if (login_funtion() == true)
+            if (Login_funtion() == true)
             {
                 MessageBox.Show("로그인 성공");
 

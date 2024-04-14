@@ -57,6 +57,7 @@
             this.mybook_columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.mybook_columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.main_tabpage3 = new System.Windows.Forms.TabPage();
+            this.admin_refresh_userlist_btn = new System.Windows.Forms.Button();
             this.admin_search_btn = new System.Windows.Forms.Button();
             this.admin_search_txt = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -92,7 +93,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.main_id_label = new System.Windows.Forms.Label();
-            this.admin_refresh_userlist_btn = new System.Windows.Forms.Button();
             this.title_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).BeginInit();
             this.main_tab.SuspendLayout();
@@ -341,6 +341,16 @@
             this.main_tabpage3.Text = "관리자";
             this.main_tabpage3.UseVisualStyleBackColor = true;
             // 
+            // admin_refresh_userlist_btn
+            // 
+            this.admin_refresh_userlist_btn.Location = new System.Drawing.Point(475, 6);
+            this.admin_refresh_userlist_btn.Name = "admin_refresh_userlist_btn";
+            this.admin_refresh_userlist_btn.Size = new System.Drawing.Size(134, 48);
+            this.admin_refresh_userlist_btn.TabIndex = 11;
+            this.admin_refresh_userlist_btn.Text = "새로고침";
+            this.admin_refresh_userlist_btn.UseVisualStyleBackColor = true;
+            this.admin_refresh_userlist_btn.Click += new System.EventHandler(this.admin_refresh_userlist_btn_Click);
+            // 
             // admin_search_btn
             // 
             this.admin_search_btn.Location = new System.Drawing.Point(399, 6);
@@ -349,6 +359,7 @@
             this.admin_search_btn.TabIndex = 10;
             this.admin_search_btn.Text = "검색";
             this.admin_search_btn.UseVisualStyleBackColor = true;
+            this.admin_search_btn.Click += new System.EventHandler(this.admin_search_btn_Click);
             // 
             // admin_search_txt
             // 
@@ -447,6 +458,7 @@
             this.admin_borrow_check.TabIndex = 5;
             this.admin_borrow_check.Text = "연체된 사용자만 보기";
             this.admin_borrow_check.UseVisualStyleBackColor = true;
+            this.admin_borrow_check.CheckedChanged += new System.EventHandler(this.admin_borrow_check_CheckedChanged);
             // 
             // admin_user_list
             // 
@@ -666,16 +678,6 @@
             this.main_id_label.Size = new System.Drawing.Size(157, 21);
             this.main_id_label.TabIndex = 3;
             this.main_id_label.Text = "NULL님 환영합니다.";
-            // 
-            // admin_refresh_userlist_btn
-            // 
-            this.admin_refresh_userlist_btn.Location = new System.Drawing.Point(475, 6);
-            this.admin_refresh_userlist_btn.Name = "admin_refresh_userlist_btn";
-            this.admin_refresh_userlist_btn.Size = new System.Drawing.Size(134, 48);
-            this.admin_refresh_userlist_btn.TabIndex = 11;
-            this.admin_refresh_userlist_btn.Text = "검색";
-            this.admin_refresh_userlist_btn.UseVisualStyleBackColor = true;
-            this.admin_refresh_userlist_btn.Click += new System.EventHandler(this.admin_refresh_userlist_btn_Click);
             // 
             // Main
             // 

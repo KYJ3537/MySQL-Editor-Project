@@ -19,11 +19,42 @@ namespace MySQL_Editor_Project
     public partial class Main : Form
     {
         private Point Drag = new Point();
+        private List<ListViewItem> filteredItems;
 
         string userId = "";
 
+        private void FilterUser_function()
+        {
+            filteredItems = new List<ListViewItem>(); // 필터링 저장을 위한 리스트
+
+            foreach (ListViewItem item in admin_user_list.Items)
+            {
+                if (item.SubItems.Count > 5 && item.SubItems[5].Text == "연체")
+                {  
+                }
+                else
+                {
+                    filteredItems.Add(item); // 연체된 사용자 필터링 리스트에 추가
+                    admin_user_list.Items.Remove(item); // 연체되지 않은 사용자 삭제
+                }
+            }
+        }
+
+        private void RestoreUserFilter_function()
+        {
+            if (filteredItems == null)
+                return;
+
+            foreach (ListViewItem item in filteredItems)
+            {
+                admin_user_list.Items.Add(item); // 저장된 필터링 리스트를 다시 리스트에 추가하기
+            }
+
+            filteredItems = null; // filteredItems 초기화
+        }
+
         //도서관 책 리스트
-        private void displayBookList_funtion()
+        private void DisplayBookList_funtion()
         {
             try
             {
@@ -60,7 +91,7 @@ namespace MySQL_Editor_Project
         }
 
         //나의 빌린 책 리스트
-        private void getborrowList_funtion()
+        private void GetBorrowList_funtion()
         {
             try
             {
@@ -90,52 +121,7 @@ namespace MySQL_Editor_Project
 
                 reader.Close();
                 connection.Close();
-                getborrowList2_funtion();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-        }
-
-        private void admin_getborrowList_funtion()
-        {
-            try
-            {
-
-                admin_user_list.Items.Clear();
-
-                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
-                connection.Open();
-
-                string query = "SELECT `id`, `bookindex`, `bookcode`, `start`, `stop` FROM book_borrow WHERE `id` = '" + userId + "'";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    ListViewItem item = new ListViewItem(reader["id"].ToString());
-                    item.SubItems.Add(reader["bookindex"].ToString());
-                    item.SubItems.Add(reader["bookcode"].ToString());
-                    item.SubItems.Add(reader["start"].ToString());
-                    item.SubItems.Add(reader["stop"].ToString());
-                    string dateString = reader["stop"].ToString().Split(' ')[0]; // 문자열에서 시간 부분을 제거하여 날짜 부분만 추출
-                    DateTime stopDate = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture); // yyyy-MM-dd 형식으로 날짜 파싱
-
-                    // 현재 시간과 비교하여 연체 여부 판단
-                    if (DateTime.Now > stopDate)
-                    {
-                        item.SubItems.Add("연체");
-                    }
-                    else
-                    {
-                    }
-                    admin_user_list.Items.Add(item);
-                }
-
-                reader.Close();
-                connection.Close();
+                GetborrowList_funtion2();
             }
             catch (Exception ex)
             {
@@ -145,7 +131,7 @@ namespace MySQL_Editor_Project
         }
 
         //2번째
-        private void getborrowList2_funtion()
+        private void GetborrowList_funtion2()
         {
             try
             {
@@ -195,6 +181,111 @@ namespace MySQL_Editor_Project
             }
         }
 
+        private void GetBorrowList_funtion_Admin()
+        {
+            try
+            {
+
+                admin_user_list.Items.Clear();
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                string query = "SELECT `id`, `bookindex`, `bookcode`, `start`, `stop` FROM book_borrow";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["id"].ToString());
+                    item.SubItems.Add(reader["bookindex"].ToString());
+                    item.SubItems.Add(reader["bookcode"].ToString());
+                    item.SubItems.Add(reader["start"].ToString());
+                    item.SubItems.Add(reader["stop"].ToString());
+                    string dateString = reader["stop"].ToString().Split(' ')[0]; // 문자열에서 시간 부분을 제거하여 날짜 부분만 추출
+                    DateTime stopDate = DateTime.ParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture); // yyyy-MM-dd 형식으로 날짜 파싱
+
+                    // 현재 시간과 비교하여 연체 여부 판단
+                    if (DateTime.Now > stopDate)
+                    {
+                        item.SubItems.Add("연체");
+                    }
+                    else
+                    {
+                    }
+                    admin_user_list.Items.Add(item);
+                }
+
+                reader.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+        }
+
+        private void SearchUserList_function_Admin(string searchText)
+        {
+            // searchText 비어있으면 GetBorrowList_funtion_Admin 호출해서 모든 리스트 불러오기
+            if (string.IsNullOrEmpty(searchText))
+            {
+                GetBorrowList_funtion_Admin();
+                return;
+            }
+
+            // 리스트뷰 전체 아이템 검색 시작
+            foreach (ListViewItem item in admin_user_list.Items)
+            {
+                bool found = false;
+
+                if (item.SubItems[0].Text == searchText)
+                {
+                    found = true;
+                }
+
+                // found 참이 아니면 그 행은 지우기
+                if (!found)
+                {
+                    admin_user_list.Items.Remove(item);
+                }
+            }
+        }
+
+        private void SearchBookList_function(string searchText)
+        {
+            // searchText 비어있으면 displayBookList 호출해서 모든 리스트 불러오기
+            if (string.IsNullOrEmpty(searchText))
+            {
+                DisplayBookList_funtion();
+                return;
+            }
+
+            // 리스트뷰 전체 아이템 검색 시작
+            foreach (ListViewItem item in search_book_listview.Items)
+            {
+                bool found = false;
+
+                // 2~6번째 북리스트뷰의 열 반복
+                for (int i = 1; i <= 5; i++)
+                {
+                    // searchText랑 같다면
+                    if (item.SubItems[i].Text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                // found 참이 아니면 그 행은 지우기
+                if (!found)
+                {
+                    search_book_listview.Items.Remove(item);
+                }
+            }
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -225,7 +316,7 @@ namespace MySQL_Editor_Project
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-
+            SearchBookList_function(search_txt.Text);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -236,9 +327,9 @@ namespace MySQL_Editor_Project
                 userId = parts[0];
             }
 
-            displayBookList_funtion();
-            getborrowList_funtion();
-            admin_getborrowList_funtion();
+            DisplayBookList_funtion();
+            GetBorrowList_funtion();
+            GetBorrowList_funtion_Admin();
         }
 
         private void search_book_listview_DoubleClick(object sender, EventArgs e)
@@ -289,16 +380,33 @@ namespace MySQL_Editor_Project
 
         private void refresh_booklist_btn_Click(object sender, EventArgs e)
         {
-            displayBookList_funtion();
-            getborrowList_funtion();
-            admin_getborrowList_funtion();
+            DisplayBookList_funtion();
+            GetBorrowList_funtion();
+            GetBorrowList_funtion_Admin();
         }
 
         private void admin_refresh_userlist_btn_Click(object sender, EventArgs e)
         {
-            displayBookList_funtion();
-            getborrowList_funtion();
-            admin_getborrowList_funtion();
+            DisplayBookList_funtion();
+            GetBorrowList_funtion();
+            GetBorrowList_funtion_Admin();
+        }
+
+        private void admin_borrow_check_CheckedChanged(object sender, EventArgs e)
+        {
+            if (admin_borrow_check.Checked)
+            {
+                FilterUser_function();
+            }
+            else
+            {
+                RestoreUserFilter_function();
+            }
+        }
+
+        private void admin_search_btn_Click(object sender, EventArgs e)
+        {
+            SearchUserList_function_Admin(admin_search_txt.Text);
         }
     }
 }

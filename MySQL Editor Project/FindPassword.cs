@@ -19,7 +19,7 @@ namespace MySQL_Editor_Project
             InitializeComponent();
         }
 
-        private int findpw_funtion()
+        private int FindPassword_funtion()
         {
             try
             {
@@ -75,7 +75,7 @@ namespace MySQL_Editor_Project
                 return;
             }
 
-            findpw_funtion();
+            FindPassword_funtion();
         }
     }
 }
