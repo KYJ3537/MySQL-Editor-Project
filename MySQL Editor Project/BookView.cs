@@ -92,7 +92,7 @@ namespace MySQL_Editor_Project
                 if (count > 0)
                 {
                     connection.Close();
-                    MessageBox.Show("이미 대출 중인 책입니다.");
+                    MessageBox.Show("이미 대여 중인 책입니다.");
                     return;
                 }
 

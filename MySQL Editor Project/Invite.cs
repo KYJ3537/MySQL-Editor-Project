@@ -134,9 +134,8 @@ namespace MySQL_Editor_Project
                 // Main 윈도우 폼 생성
                 Main mainForm = new Main();
                 mainForm.main_id_label.Text = txt_Login_id.Text + "님 환영합니다.";
-                mainForm.ShowDialog();
+                mainForm.Show();
                 this.Hide();
-
             }
             else
             {

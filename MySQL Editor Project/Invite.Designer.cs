@@ -142,6 +142,7 @@
             this.txt_Login_pw.PasswordChar = '*';
             this.txt_Login_pw.Size = new System.Drawing.Size(227, 23);
             this.txt_Login_pw.TabIndex = 1;
+            this.txt_Login_pw.Text = "admin";
             // 
             // txt_Login_id
             // 
@@ -149,6 +150,7 @@
             this.txt_Login_id.Name = "txt_Login_id";
             this.txt_Login_id.Size = new System.Drawing.Size(227, 23);
             this.txt_Login_id.TabIndex = 0;
+            this.txt_Login_id.Text = "admin";
             // 
             // tabPage2
             // 

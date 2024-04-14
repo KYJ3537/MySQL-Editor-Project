@@ -139,7 +139,7 @@
             this.checkOut_btn.Name = "checkOut_btn";
             this.checkOut_btn.Size = new System.Drawing.Size(192, 55);
             this.checkOut_btn.TabIndex = 9;
-            this.checkOut_btn.Text = "대출하기";
+            this.checkOut_btn.Text = "대여하기";
             this.checkOut_btn.UseVisualStyleBackColor = true;
             this.checkOut_btn.Click += new System.EventHandler(this.checkOut_btn_Click);
             // 
@@ -202,7 +202,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BookView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "책 대출하기";
+            this.Text = "책 대여하기";
             this.Load += new System.EventHandler(this.BookView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).EndInit();
             this.title_panel.ResumeLayout(false);
