@@ -43,11 +43,31 @@ namespace MySQL_Editor_Project
                     }
                 }
 
-                if (login_status == 1)
+                userAccount.Close();
+
+                if (login_status == 1) //로그인 성공시
                 {
-                    DateTimePicker dateTime1 = new DateTimePicker();
-                    connection.Close();
-                    return true;
+                    //현재 시간 string 변수로 lastlogin 컬럼 데이터 규격에 맞게 변환
+                    DateTime currentTime = DateTime.Now;
+                    string nowTime = currentTime.ToString("yyyy-MM-dd hh:mm:ss");
+
+                    //라스트 로그인 UPDATE문
+                    string updateQuery = "UPDATE accounts SET lastlogin = '" + nowTime + "' WHERE id = '" + loginid + "'";
+
+                    MySqlCommand command = new MySqlCommand(updateQuery, connection);
+
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                        connection.Close();
+                        return true;
+                    }
+                    else
+                    {
+                        connection.Close();
+                        MessageBox.Show("마지막 로그인 업데이트 실패");
+                        return false;
+                    }
+
                 }
                 else
                 {
@@ -63,7 +83,7 @@ namespace MySQL_Editor_Project
             }
         }
 
-        private bool register_funtion()
+        private bool Register_funtion()
         {
             try
             {
@@ -88,10 +108,15 @@ namespace MySQL_Editor_Project
                 // 생년월일을 birthday 컬럼 데이터 규격에 맞게 변환
                 timepicker_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
 
-                string insertQuery = "INSERT INTO accounts (id, password, email, birthday) VALUES ('" + txt_register_id.Text +
+                //현재 시간 string 변수로 lastlogin 컬럼 데이터 규격에 맞게 변환
+                DateTime currentTime = DateTime.Now;
+                string nowTime = currentTime.ToString("yyyy-MM-dd hh:mm:ss");
+
+                string insertQuery = "INSERT INTO accounts (id, password, email, birthday, lastlogin) VALUES ('" + txt_register_id.Text +
                                                                                                   "', '" + txt_register_pw.Text +
                                                                                                   "', '" + txt_register_email.Text +
-                                                                                                  "', '" + timepicker_birth.Text + "');";
+                                                                                                  "', '" + timepicker_birth.Text +
+                                                                                                  "', '" + nowTime + "');";
 
                 MySqlCommand command = new MySqlCommand(insertQuery, connection);
 
@@ -103,7 +128,7 @@ namespace MySQL_Editor_Project
                 else
                 {
                     connection.Close();
-                    MessageBox.Show("오류 발생");
+                    MessageBox.Show("회원가입 오류 발생");
                     return false;
                 }
             }
@@ -173,7 +198,7 @@ namespace MySQL_Editor_Project
                 return;
             }
 
-            if (register_funtion() == true)
+            if (Register_funtion() == true)
             {
                 MessageBox.Show("회원가입 완료");
             }

@@ -368,6 +368,7 @@
             this.admin_search_txt.Name = "admin_search_txt";
             this.admin_search_txt.Size = new System.Drawing.Size(390, 23);
             this.admin_search_txt.TabIndex = 9;
+            this.admin_search_txt.Text = "검색하실 아이디 전체를 입력해주세요.";
             // 
             // groupBox3
             // 
