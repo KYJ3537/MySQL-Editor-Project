@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf;
+using Microsoft.VisualBasic.ApplicationServices;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace MySQL_Editor_Project
         }
 
         //도서관 책 리스트
-        private void DisplayBookList_funtion()
+        public void DisplayBookList_funtion()
         {
             try
             {
@@ -91,7 +92,7 @@ namespace MySQL_Editor_Project
         }
 
         //나의 빌린 책 리스트
-        private void GetBorrowList_funtion()
+        public void GetBorrowList_funtion()
         {
             try
             {
@@ -131,7 +132,7 @@ namespace MySQL_Editor_Project
         }
 
         //2번째
-        private void GetborrowList_funtion2()
+        public void GetborrowList_funtion2()
         {
             try
             {
@@ -181,7 +182,8 @@ namespace MySQL_Editor_Project
             }
         }
 
-        private void GetBorrowList_funtion_Admin()
+        // 빌린책
+        public void GetBorrowList_funtion_Admin()
         {
             try
             {
@@ -286,6 +288,200 @@ namespace MySQL_Editor_Project
             }
         }
 
+        private bool InsertBook_function_Admin()
+        {
+            try
+            {
+                if (admin_id_txt.Text == "" || 
+                    admin_write_txt.Text == "" ||
+                    admin_genre_txt.Text == "" ||
+                    admin_contents_txt.Text == "" ||
+                    admin_number_txt.Text == "" ||
+                    admin_remain_txt.Text == "" ||
+                    admin_image_txt.Text == "")
+                {
+                    MessageBox.Show("입력해주세요.");
+                    return false;
+                }
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                // 해당 책 이름이 존재하는지 확인
+                string checkQuery = "SELECT COUNT(*) FROM book_list WHERE name = \'" + admin_id_txt.Text + "\' ";
+                MySqlCommand checkBookNameCommand = new MySqlCommand(checkQuery, connection);
+
+                int count = Convert.ToInt32(checkBookNameCommand.ExecuteScalar());
+
+                // 책 이름이 존재하면 거부 후 반환
+                if (count > 0)
+                {
+                    connection.Close();
+                    MessageBox.Show("이미 존재하는 책 이름입니다.");
+                    return false;
+                }
+
+                // 해당 고유번호가 존재하는지 확인
+                checkQuery = "SELECT COUNT(*) FROM book_list WHERE code = \'" + admin_number_txt.Text + "\' ";
+                MySqlCommand checkBookNumberCommand = new MySqlCommand(checkQuery, connection);
+
+                count = Convert.ToInt32(checkBookNumberCommand.ExecuteScalar());
+
+                // 고유번호가 존재하면 거부 후 반환
+                if (count > 0)
+                {
+                    connection.Close();
+                    MessageBox.Show("이미 존재하는 고유번호입니다.");
+                    return false;
+                }
+
+                string insertQuery = "INSERT INTO book_list (name, writer, genre, title, code, remain, image) VALUES ('" + admin_id_txt.Text +
+                                                                                                  "', '" + admin_write_txt.Text +
+                                                                                                  "', '" + admin_genre_txt.Text +
+                                                                                                  "', '" + admin_contents_txt.Text +
+                                                                                                  "', '" + admin_number_txt.Text +
+                                                                                                  "', '" + admin_remain_txt.Text +
+                                                                                                  "', '" + admin_image_txt.Text + "');";
+
+                MySqlCommand command = new MySqlCommand(insertQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    DisplayBookList_funtion();
+                    MessageBox.Show("해당 책을 진열합니다.");
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    DisplayBookList_funtion();
+                    connection.Close();
+                    MessageBox.Show("책 등록 오류 발생");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        private void AddBookRemain_funtion_Admin(string book_number)
+        {
+            try
+            {
+                if (book_number == "")
+                {
+                    MessageBox.Show("입력해주세요.");
+                    return;
+                }
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                // 현재 remain 데이터 문자화해서 가져오기
+                string selectQuery = "SELECT remain FROM book_list WHERE code = '" + book_number + "'";
+                MySqlCommand getCurrentRemainCommand = new MySqlCommand(selectQuery, connection);
+
+                // 오류발생 방지하기, 비어있는지 체크
+                object result = getCurrentRemainCommand.ExecuteScalar();
+
+                if (result == null)
+                {
+                    MessageBox.Show("책을 찾을 수 없습니다.");
+                    return;
+                }
+
+                string currentRemain = result.ToString();
+
+                //현재 재고 수 인트 형식으로 +1 해서 저장
+                int remainIntValue = int.Parse(currentRemain) + 1;
+
+                //int 형식 다시 문자열로 변환
+                string addRemain = remainIntValue.ToString();
+
+                string updateQuery = "UPDATE book_list SET remain = '" + addRemain + "' WHERE code = '" + book_number + "'";
+
+                MySqlCommand command = new MySqlCommand(updateQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("재고 수량을 1개 늘렸습니다.");
+                }
+                else
+                {
+                    MessageBox.Show("재고 증가 실패");
+                }
+                DisplayBookList_funtion();
+                connection.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void IncreaseUserBookTime_funtion_Admin(string userid, string num, string time)
+        {
+            try
+            {
+                if (userid == "" || num == "" || time == "")
+                {
+                    MessageBox.Show("입력해주세요.");
+                    return;
+                }
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                // stop 데이터 문자화해서 가져오기
+                string selectQuery = "SELECT stop FROM book_borrow WHERE bookcode = '" + num + "' AND id = '" + userid + "'";
+                MySqlCommand getStopCommand = new MySqlCommand(selectQuery, connection);
+
+                // 오류발생 방지하기, 오브젝트에 결과 넣고 비어있는지 체크
+                object result = getStopCommand.ExecuteScalar();
+
+                if (result == null)
+                {
+                    MessageBox.Show("사용자 정보를 찾을 수 없습니다.");
+                    return;
+                }
+
+                //날짜 파싱날짜 연 월 일까지만 데이터 담기
+                string userstop = result.ToString().Split(' ')[0];
+
+                // 데이터 형식 변환
+                DateTime stopDate = DateTime.ParseExact(userstop, "yyyy-MM-dd", CultureInfo.InvariantCulture); 
+
+                // 입력한 일 수만큼 늘리기
+                stopDate = stopDate.AddDays(int.Parse(time));
+
+                // 늘어난 날짜를 다시 문자열로 변환하여 저장
+                userstop = stopDate.ToString("yyyy-MM-dd hh:mm:ss");
+
+                string updateQuery = "UPDATE book_borrow SET stop = '" + userstop + "' WHERE bookcode = '" + num + "' AND id = '" + userid + "'";
+
+                MySqlCommand command = new MySqlCommand(updateQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show(userid + "님의 " + num + "책 대여 기간을 " + time + "일만큼 늘렸습니다.\r\n\r\n반납 기한 : " + userstop);
+                }
+                else
+                {
+                    MessageBox.Show("기한 늘리기 실패");
+                }
+                GetBorrowList_funtion_Admin();
+                GetBorrowList_funtion();
+                connection.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -339,8 +535,8 @@ namespace MySQL_Editor_Project
                 // 선택된 아이템의 정보 가져오기
                 ListViewItem selectedItem = search_book_listview.SelectedItems[0];
 
-                // BookView 윈도우 폼 생성
-                BookView bookViewForm = new BookView();
+                // BookView 윈도우 폼 생성 및 전달
+                BookView bookViewForm = new BookView(this);
 
                 // BookView 윈도우 폼의 label에 정보 전달
                 bookViewForm.bv_title_label.Text = selectedItem.SubItems[1].Text + " - (" + selectedItem.SubItems[0].Text + ")"; // name (index)
@@ -407,6 +603,26 @@ namespace MySQL_Editor_Project
         private void admin_search_btn_Click(object sender, EventArgs e)
         {
             SearchUserList_function_Admin(admin_search_txt.Text);
+        }
+
+        private void admin_upload_book_btn_Click(object sender, EventArgs e)
+        {
+            InsertBook_function_Admin();
+        }
+
+        private void admin_add_remain_btn_Click(object sender, EventArgs e)
+        {
+            AddBookRemain_funtion_Admin(admin_add_remain_number.Text);
+        }
+
+        private void admin_add_time_btn_Click(object sender, EventArgs e)
+        {
+            IncreaseUserBookTime_funtion_Admin(admin_addtime_id_txt.Text, admin_addtime_booknum_txt.Text, admin_addtime_time_txt.Text);
+        }
+
+        private void admin_user_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

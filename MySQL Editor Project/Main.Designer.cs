@@ -65,8 +65,12 @@
             this.admin_add_remain_number = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.admin_addtime_time_txt = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.admin_addtime_booknum_txt = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.admin_add_time_btn = new System.Windows.Forms.Button();
-            this.admin_add_time_txt = new System.Windows.Forms.TextBox();
+            this.admin_addtime_id_txt = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.admin_borrow_check = new System.Windows.Forms.CheckBox();
             this.admin_user_list = new System.Windows.Forms.ListView();
@@ -376,9 +380,9 @@
             this.groupBox3.Controls.Add(this.admin_add_remain_number);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(615, 299);
+            this.groupBox3.Location = new System.Drawing.Point(615, 289);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(380, 91);
+            this.groupBox3.Size = new System.Drawing.Size(380, 92);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "이미 있는 책 재고 추가";
@@ -387,10 +391,11 @@
             // 
             this.admin_add_remain_btn.Location = new System.Drawing.Point(6, 52);
             this.admin_add_remain_btn.Name = "admin_add_remain_btn";
-            this.admin_add_remain_btn.Size = new System.Drawing.Size(368, 33);
+            this.admin_add_remain_btn.Size = new System.Drawing.Size(368, 34);
             this.admin_add_remain_btn.TabIndex = 14;
             this.admin_add_remain_btn.Text = "추가";
             this.admin_add_remain_btn.UseVisualStyleBackColor = true;
+            this.admin_add_remain_btn.Click += new System.EventHandler(this.admin_add_remain_btn_Click);
             // 
             // admin_add_remain_number
             // 
@@ -412,33 +417,74 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.admin_addtime_time_txt);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.admin_addtime_booknum_txt);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.admin_add_time_btn);
-            this.groupBox2.Controls.Add(this.admin_add_time_txt);
+            this.groupBox2.Controls.Add(this.admin_addtime_id_txt);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(615, 396);
+            this.groupBox2.Location = new System.Drawing.Point(615, 387);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(380, 113);
+            this.groupBox2.Size = new System.Drawing.Size(380, 122);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "반납 날짜 늘리기";
             // 
+            // admin_addtime_time_txt
+            // 
+            this.admin_addtime_time_txt.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.admin_addtime_time_txt.Location = new System.Drawing.Point(344, 51);
+            this.admin_addtime_time_txt.Name = "admin_addtime_time_txt";
+            this.admin_addtime_time_txt.Size = new System.Drawing.Size(30, 23);
+            this.admin_addtime_time_txt.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(257, 52);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 16);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "늘릴 기한";
+            // 
+            // admin_addtime_booknum_txt
+            // 
+            this.admin_addtime_booknum_txt.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.admin_addtime_booknum_txt.Location = new System.Drawing.Point(127, 51);
+            this.admin_addtime_booknum_txt.Name = "admin_addtime_booknum_txt";
+            this.admin_addtime_booknum_txt.Size = new System.Drawing.Size(124, 23);
+            this.admin_addtime_booknum_txt.TabIndex = 16;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(6, 51);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(98, 16);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "책 고유번호";
+            // 
             // admin_add_time_btn
             // 
-            this.admin_add_time_btn.Location = new System.Drawing.Point(6, 52);
+            this.admin_add_time_btn.Location = new System.Drawing.Point(6, 80);
             this.admin_add_time_btn.Name = "admin_add_time_btn";
-            this.admin_add_time_btn.Size = new System.Drawing.Size(368, 51);
+            this.admin_add_time_btn.Size = new System.Drawing.Size(368, 36);
             this.admin_add_time_btn.TabIndex = 14;
             this.admin_add_time_btn.Text = "늘리기";
             this.admin_add_time_btn.UseVisualStyleBackColor = true;
+            this.admin_add_time_btn.Click += new System.EventHandler(this.admin_add_time_btn_Click);
             // 
-            // admin_add_time_txt
+            // admin_addtime_id_txt
             // 
-            this.admin_add_time_txt.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.admin_add_time_txt.Location = new System.Drawing.Point(53, 22);
-            this.admin_add_time_txt.Name = "admin_add_time_txt";
-            this.admin_add_time_txt.Size = new System.Drawing.Size(321, 23);
-            this.admin_add_time_txt.TabIndex = 7;
+            this.admin_addtime_id_txt.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.admin_addtime_id_txt.Location = new System.Drawing.Point(127, 22);
+            this.admin_addtime_id_txt.Name = "admin_addtime_id_txt";
+            this.admin_addtime_id_txt.Size = new System.Drawing.Size(247, 23);
+            this.admin_addtime_id_txt.TabIndex = 7;
             // 
             // label14
             // 
@@ -446,9 +492,9 @@
             this.label14.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label14.Location = new System.Drawing.Point(6, 23);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 16);
+            this.label14.Size = new System.Drawing.Size(115, 16);
             this.label14.TabIndex = 0;
-            this.label14.Text = "날짜";
+            this.label14.Text = "사용자 아이디";
             // 
             // admin_borrow_check
             // 
@@ -478,6 +524,7 @@
             this.admin_user_list.TabIndex = 4;
             this.admin_user_list.UseCompatibleStateImageBehavior = false;
             this.admin_user_list.View = System.Windows.Forms.View.Details;
+            this.admin_user_list.SelectedIndexChanged += new System.EventHandler(this.admin_user_list_SelectedIndexChanged);
             // 
             // admin_user_columnHeader0
             // 
@@ -528,19 +575,20 @@
             this.groupBox1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(615, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(380, 289);
+            this.groupBox1.Size = new System.Drawing.Size(380, 277);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "책 등록하기";
             // 
             // admin_upload_book_btn
             // 
-            this.admin_upload_book_btn.Location = new System.Drawing.Point(6, 230);
+            this.admin_upload_book_btn.Location = new System.Drawing.Point(6, 225);
             this.admin_upload_book_btn.Name = "admin_upload_book_btn";
-            this.admin_upload_book_btn.Size = new System.Drawing.Size(368, 51);
+            this.admin_upload_book_btn.Size = new System.Drawing.Size(368, 46);
             this.admin_upload_book_btn.TabIndex = 14;
             this.admin_upload_book_btn.Text = "등록";
             this.admin_upload_book_btn.UseVisualStyleBackColor = true;
+            this.admin_upload_book_btn.Click += new System.EventHandler(this.admin_upload_book_btn_Click);
             // 
             // admin_image_txt
             // 
@@ -745,7 +793,7 @@
         private ColumnHeader search_book_listview_columnHeader7;
         private GroupBox groupBox2;
         private Button admin_add_time_btn;
-        private TextBox admin_add_time_txt;
+        private TextBox admin_addtime_id_txt;
         private Label label14;
         private CheckBox admin_borrow_check;
         private ListView admin_user_list;
@@ -780,5 +828,9 @@
         private ColumnHeader admin_user_columnHeader5;
         private Button refresh_booklist_btn;
         private Button admin_refresh_userlist_btn;
+        private TextBox admin_addtime_booknum_txt;
+        private Label label9;
+        private TextBox admin_addtime_time_txt;
+        private Label label10;
     }
 }

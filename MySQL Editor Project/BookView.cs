@@ -15,16 +15,19 @@ namespace MySQL_Editor_Project
 {
     public partial class BookView : Form
     {
+        //인스턴스 생성자 구성
+        private Main mainFormInstance;
+
+        public BookView(Main mainFormInstance)
+        {
+            InitializeComponent();
+            this.mainFormInstance = mainFormInstance;
+        }
+
         private Point Drag = new Point();
         public string bv_user_id = "";
         private string bv_account_index = "";
         private string bv_book_index = "";
-
-        public BookView()
-        {
-            InitializeComponent();
-            
-        }
 
         private void LoadImage_Funtion()
         {
@@ -111,15 +114,29 @@ namespace MySQL_Editor_Project
 
                 MySqlCommand command = new MySqlCommand(insertQuery, connection);
 
+
                 if (command.ExecuteNonQuery() == 1)
                 {
                     connection.Close();
+                    MessageBox.Show("책 대여 완료\r\n" + "반납일은 " + stopTime + " 까지 입니다.");
+
+                    this.Hide();
+
+                    mainFormInstance.DisplayBookList_funtion(); // DisplayBookList_funtion() 함수
+                    mainFormInstance.GetBorrowList_funtion();
+                    mainFormInstance.GetBorrowList_funtion_Admin();
+
                     return;
                 }
                 else
                 {
                     connection.Close();
                     MessageBox.Show("오류 발생");
+
+                    mainFormInstance.DisplayBookList_funtion(); // DisplayBookList_funtion() 함수
+                    mainFormInstance.GetBorrowList_funtion();
+                    mainFormInstance.GetBorrowList_funtion_Admin();
+
                     return;
                 }
             }

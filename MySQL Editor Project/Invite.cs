@@ -51,7 +51,7 @@ namespace MySQL_Editor_Project
                     DateTime currentTime = DateTime.Now;
                     string nowTime = currentTime.ToString("yyyy-MM-dd hh:mm:ss");
 
-                    //라스트 로그인 UPDATE문
+                    //라스트 로그인 업데이트문
                     string updateQuery = "UPDATE accounts SET lastlogin = '" + nowTime + "' WHERE id = '" + loginid + "'";
 
                     MySqlCommand command = new MySqlCommand(updateQuery, connection);
