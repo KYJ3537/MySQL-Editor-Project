@@ -7563,4 +7563,7 @@
         AADQtzgEAAB9i0MAANC3OAQAAH2LQwAA0Lc4BAAAPbv5x/4/HvDxvlDUnP8AAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="adminMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

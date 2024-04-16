@@ -288,6 +288,91 @@ namespace MySQL_Editor_Project
             }
         }
 
+        private void ReturnBook_function(string userid, string bookindex, string bookid)
+        {
+            try
+            {
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                // 해당 아이디, 북인덱스, 북아이디가 모두 동일한 행이 있는지 조회 시작
+                string checkQuery = "SELECT COUNT(*) FROM book_borrow WHERE id = '" + userid + 
+                                                               "' AND bookindex = '" + bookindex + 
+                                                               "' AND bookcode = '" + bookid + "'";
+
+                MySqlCommand checkBookNameCommand = new MySqlCommand(checkQuery, connection);
+
+                int count = Convert.ToInt32(checkBookNameCommand.ExecuteScalar());
+
+                // 해당 조건에 맞는 행이 1개라면 시작
+                if (count == 1)
+                {
+                    //DELETE 시작
+                    string deleteQuery = "DELETE FROM book_borrow WHERE id = '" + userid +
+                                                          "' AND bookindex = '" + bookindex + 
+                                                          "' AND bookcode = '" + bookid + "'";
+                    MySqlCommand deletecommand = new MySqlCommand(deleteQuery, connection);
+
+                    // 삭제 쿼리문이 정상적으로 실행되었으면
+                    if (deletecommand.ExecuteNonQuery() == 1)
+                    {
+                        MessageBox.Show("삭제되었습니다.");
+
+                        // 현재 remain 데이터 문자화해서 가져오기
+                        string selectQuery = "SELECT remain FROM book_list WHERE code = '" + bookid + "'";
+
+                        MySqlCommand getCurrentRemainCommand = new MySqlCommand(selectQuery, connection);
+
+                        // 오류발생 방지하기, 비어있는지 체크
+                        object result = getCurrentRemainCommand.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            MessageBox.Show("조회 완료");
+                            string currentRemain = result.ToString();
+
+                            //현재 재고 수 인트 형식으로 +1 해서 저장
+                            int remainIntValue = int.Parse(currentRemain) + 1;
+
+                            //int 형식 다시 문자열로 변환
+                            string addRemain = remainIntValue.ToString();
+
+                            //재고 늘리기
+                            string updateQuery = "UPDATE book_list SET remain = '" + addRemain +
+                                                 "' WHERE code = '" + bookid + "'";
+
+                            MySqlCommand updatecommand = new MySqlCommand(updateQuery, connection);
+
+                            if (updatecommand.ExecuteNonQuery() == 1)
+                            {
+                                MessageBox.Show("재고 수량을 1개 늘렸습니다.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("재고를 늘리는 과정 중 오류가 발생했습니다.");
+                            }
+                        } else
+                        {
+                            MessageBox.Show("재고 수를 조회하지 못했습니다.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("삭제 중 오류가 발생했습니다.");
+                    }
+                } else
+                {
+                    MessageBox.Show("선택된 아이템은 존재하지 않거나 2개 이상입니다.");
+                }
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private bool InsertBook_function_Admin()
         {
             try
@@ -530,6 +615,7 @@ namespace MySQL_Editor_Project
 
         private void search_book_listview_DoubleClick(object sender, EventArgs e)
         {
+
             if (search_book_listview.SelectedItems.Count > 0)
             {
                 // 선택된 아이템의 정보 가져오기
@@ -544,7 +630,7 @@ namespace MySQL_Editor_Project
                 bookViewForm.bv_genrn_label.Text = selectedItem.SubItems[3].Text; // genre
                 bookViewForm.bv_contents_label.Text = selectedItem.SubItems[4].Text; // contents
                 bookViewForm.bv_number_label.Text = selectedItem.SubItems[5].Text; // code
-                bookViewForm.bv_last_label.Text = "남은 재고 수 : " + selectedItem.SubItems[6].Text; // remain
+                bookViewForm.bv_last_label.Text = "남은 재고 수 [" + selectedItem.SubItems[6].Text + "]"; // remain
                 bookViewForm.bv_image_txt.Text = selectedItem.SubItems[7].Text; // image
                 
 
@@ -622,6 +708,34 @@ namespace MySQL_Editor_Project
 
         private void admin_user_list_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void admin_user_list_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (admin_user_list.SelectedItems.Count > 0)
+                {
+                    adminMenu.Show(admin_user_list, e.Location);
+                }
+            }
+        }
+
+        private void adminReturnBook_Click(object sender, EventArgs e)
+        {
+            
+            string userid = admin_user_list.SelectedItems[0].SubItems[0].Text; // 아이디
+            string bookindex = admin_user_list.SelectedItems[0].SubItems[1].Text; // 책인덱스
+            string bookid = admin_user_list.SelectedItems[0].SubItems[2].Text; // 책번호
+
+            MessageBox.Show($"아이디 : {userid}\r\n" + $"책 인덱스 : {bookindex}\r\n" + $"책 번호 : {bookid}\r\n");
+
+            ReturnBook_function(userid, bookindex, bookid);
+
+            DisplayBookList_funtion();
+            GetBorrowList_funtion();
+            GetBorrowList_funtion_Admin();
 
         }
     }

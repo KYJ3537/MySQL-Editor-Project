@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using MySql.Data.MySqlClient;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using MySqlX.XDevAPI.Common;
 
 namespace MySQL_Editor_Project
 {
@@ -28,6 +29,8 @@ namespace MySQL_Editor_Project
         public string bv_user_id = "";
         private string bv_account_index = "";
         private string bv_book_index = "";
+        int last_label_startIndex, last_label_endIndex;
+        string currentRemain = "";
 
         private void LoadImage_Funtion()
         {
@@ -45,6 +48,36 @@ namespace MySQL_Editor_Project
                     // 이미지를 PictureBox에 설정
                     bv_image.Image = image;
                 }
+            }
+        }
+
+        private void DeleteBookRemain_funtion()
+        {
+            try
+            {
+
+                MySqlConnection connection = new MySqlConnection("Server=localhost;Port=3307;Database=sql_edit_db;Uid=root;Pwd=root;");
+                connection.Open();
+
+                //현재 재고 수 인트 형식으로 -1 해서 저장
+                int remainIntValue = int.Parse(currentRemain) - 1;
+
+                //int 형식 다시 문자열로 변환
+                string deleteRemain = remainIntValue.ToString();
+
+                string updateQuery = "UPDATE book_list SET remain = '" + deleteRemain + "' WHERE code = '" + bv_number_label.Text + "'";
+
+                MySqlCommand command = new MySqlCommand(updateQuery, connection);
+
+                if (command.ExecuteNonQuery() != 1)
+                {
+                    MessageBox.Show("재고를 빼는 도중 오류가 발생했습니다.\r\n관리자에게 문의해주세요.");
+                }
+                connection.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -117,7 +150,11 @@ namespace MySQL_Editor_Project
 
                 if (command.ExecuteNonQuery() == 1)
                 {
+
+                    DeleteBookRemain_funtion();
+
                     connection.Close();
+
                     MessageBox.Show("책 대여 완료\r\n" + "반납일은 " + stopTime + " 까지 입니다.");
 
                     this.Hide();
@@ -163,6 +200,14 @@ namespace MySQL_Editor_Project
             }
         }
 
+        private void BookView_Load(object sender, EventArgs e)
+        {
+            LoadImage_Funtion();
+            last_label_startIndex = bv_last_label.Text.IndexOf('[');
+            last_label_endIndex = bv_last_label.Text.IndexOf(']');
+            currentRemain = bv_last_label.Text.Substring(last_label_startIndex + 1, last_label_endIndex - last_label_startIndex - 1);
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -180,12 +225,13 @@ namespace MySQL_Editor_Project
 
         private void checkOut_btn_Click(object sender, EventArgs e)
         {
-            Borrow_funtion();
-        }
-
-        private void BookView_Load(object sender, EventArgs e)
-        {
-            LoadImage_Funtion();
+            if (currentRemain != "0")
+            {
+                Borrow_funtion();
+            } else
+            {
+                MessageBox.Show("재고 수가 부족합니다.");
+            }
         }
 
         private void bv_image_txt_TextChanged(object sender, EventArgs e)

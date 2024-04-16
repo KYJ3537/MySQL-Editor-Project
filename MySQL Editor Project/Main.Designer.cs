@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.title_panel = new System.Windows.Forms.Panel();
             this.exit_btn = new System.Windows.Forms.PictureBox();
@@ -97,6 +98,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.main_id_label = new System.Windows.Forms.Label();
+            this.adminMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.adminReturnBook = new System.Windows.Forms.ToolStripMenuItem();
             this.title_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exit_btn)).BeginInit();
             this.main_tab.SuspendLayout();
@@ -106,6 +109,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.adminMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // title_panel
@@ -191,6 +195,7 @@
             this.search_book_listview.View = System.Windows.Forms.View.Details;
             this.search_book_listview.SelectedIndexChanged += new System.EventHandler(this.search_book_listview_SelectedIndexChanged);
             this.search_book_listview.DoubleClick += new System.EventHandler(this.search_book_listview_DoubleClick);
+            this.search_book_listview.MouseClick += new System.Windows.Forms.MouseEventHandler(this.admin_user_list_MouseClick);
             // 
             // search_book_listview_columnHeader0
             // 
@@ -258,7 +263,7 @@
             this.main_tabpage2.Padding = new System.Windows.Forms.Padding(3);
             this.main_tabpage2.Size = new System.Drawing.Size(1001, 512);
             this.main_tabpage2.TabIndex = 1;
-            this.main_tabpage2.Text = "현재 내가 빌리고 있는 도서 목록";
+            this.main_tabpage2.Text = "내가 대여 중인 도서 목록";
             this.main_tabpage2.UseVisualStyleBackColor = true;
             // 
             // mybook_listview
@@ -525,6 +530,7 @@
             this.admin_user_list.UseCompatibleStateImageBehavior = false;
             this.admin_user_list.View = System.Windows.Forms.View.Details;
             this.admin_user_list.SelectedIndexChanged += new System.EventHandler(this.admin_user_list_SelectedIndexChanged);
+            this.admin_user_list.MouseClick += new System.Windows.Forms.MouseEventHandler(this.admin_user_list_MouseClick);
             // 
             // admin_user_columnHeader0
             // 
@@ -534,22 +540,22 @@
             // admin_user_columnHeader1
             // 
             this.admin_user_columnHeader1.Text = "책 인덱스";
-            this.admin_user_columnHeader1.Width = 70;
+            this.admin_user_columnHeader1.Width = 65;
             // 
             // admin_user_columnHeader2
             // 
             this.admin_user_columnHeader2.Text = "고유 번호";
-            this.admin_user_columnHeader2.Width = 70;
+            this.admin_user_columnHeader2.Width = 98;
             // 
             // admin_user_columnHeader3
             // 
             this.admin_user_columnHeader3.Text = "대여 날짜";
-            this.admin_user_columnHeader3.Width = 150;
+            this.admin_user_columnHeader3.Width = 140;
             // 
             // admin_user_columnHeader4
             // 
             this.admin_user_columnHeader4.Text = "반납 날짜";
-            this.admin_user_columnHeader4.Width = 150;
+            this.admin_user_columnHeader4.Width = 140;
             // 
             // admin_user_columnHeader5
             // 
@@ -728,6 +734,20 @@
             this.main_id_label.TabIndex = 3;
             this.main_id_label.Text = "NULL님 환영합니다.";
             // 
+            // adminMenu
+            // 
+            this.adminMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adminReturnBook});
+            this.adminMenu.Name = "adminMenu";
+            this.adminMenu.Size = new System.Drawing.Size(123, 26);
+            // 
+            // adminReturnBook
+            // 
+            this.adminReturnBook.Name = "adminReturnBook";
+            this.adminReturnBook.Size = new System.Drawing.Size(122, 22);
+            this.adminReturnBook.Text = "반납하기";
+            this.adminReturnBook.Click += new System.EventHandler(this.adminReturnBook_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -757,6 +777,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.adminMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -832,5 +853,7 @@
         private Label label9;
         private TextBox admin_addtime_time_txt;
         private Label label10;
+        private ContextMenuStrip adminMenu;
+        private ToolStripMenuItem adminReturnBook;
     }
 }
