@@ -45,13 +45,23 @@
 #### 책 대여 리스트
 ![main1](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/17b509a9-bca9-43aa-b2be-e38d430294f7)
 ![main1_2](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/2812abe8-e1d0-4c33-9ccf-aaec77c1ff9e)
+
+- 작성 예정
+  
 #### 내가 대여 중인 도서 목록
 ![main2](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/08dac9c3-0fd2-49a6-a4c2-68e0993121d6)
+
+- 작성 예정
+  
 #### 관리자
 ![main3](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/dc454e80-c50b-4490-8178-0a0427a6e034)
 
+- 작성 예정
+
 ### BookView 동작 구조
 ![main1_1](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/c2f10bce-ce86-40d1-928a-6746de5badc4)
+
+- 작성 예정
 
 ### 프로그램의 완성도를 높이기 위해서 추후 추가할 일 기록 
 
