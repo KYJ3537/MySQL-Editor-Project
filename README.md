@@ -3,7 +3,7 @@
 ## Winform GUI에 보여지는 모든 기능 구현 완료.
 
 ### Database 테이블구조
-![dbtable](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/27ea0958-f548-4a11-84c4-2a5d481b7830)
+![dbtable](https://github.com/KYJ3537/MySQL-Editor-Project/assets/107566312/d2c5065f-14e2-4a51-ad57-a84b837da1c7)
 
 ### Invite 동작구조
 #### 로그인
