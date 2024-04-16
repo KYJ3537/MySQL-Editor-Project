@@ -106,7 +106,7 @@ namespace MySQL_Editor_Project
                 }
 
                 // 생년월일을 birthday 컬럼 데이터 규격에 맞게 변환
-                timepicker_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+                timepicker_birth.CustomFormat = "yyyy-MM-dd";
 
                 //현재 시간 string 변수로 lastlogin 컬럼 데이터 규격에 맞게 변환
                 DateTime currentTime = DateTime.Now;

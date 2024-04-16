@@ -28,9 +28,9 @@ namespace MySQL_Editor_Project
 
                 // 사용자가 입력한 정보와 일치하는 계정을 조회하는 쿼리
 
-                timepicker_findpw_birth.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+                timepicker_findpw_birth.CustomFormat = "yyyy-MM-dd";
 
-                string find_query = "SELECT password FROM accounts WHERE id = '" + txt_findpw_id.Text +
+                string find_query = "SELECT password, birthday FROM accounts WHERE id = '" + txt_findpw_id.Text +
                                                               "' AND email = '" + txt_findpw_email.Text +
                                                               "' AND birthday = '" + timepicker_findpw_birth.Text +
                                                               "'";
@@ -43,6 +43,7 @@ namespace MySQL_Editor_Project
                 if (reader.Read())
                 {
                     string password = reader.GetString("password");
+                    string birthday = reader.GetDateTime("birthday").ToString();
                     MessageBox.Show("아이디 " + txt_findpw_id.Text + "의 비밀번호\r\n\r\n" + password);
                     connection.Close();
                     this.Close();
@@ -74,7 +75,7 @@ namespace MySQL_Editor_Project
                 MessageBox.Show("이메일을 입력해주세요.");
                 return;
             }
-
+            timepicker_findpw_birth.CustomFormat = "yyyy-MM-dd";
             FindPassword_funtion();
         }
     }
